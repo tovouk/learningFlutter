@@ -2,23 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
-
+//the main app widget
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Startup Name Generator',
+      //override this to change theme settings
+      theme: new ThemeData(
+        primaryColor: Colors.white,
+      ),
       home: RandomWords(),
     );
   }
 }
-
+//class makes use of states to be used in main app widget
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final Set<WordPair> _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
-
+//builds widget
   @override
   Widget build(BuildContext context) {
     return Scaffold (
@@ -32,7 +36,7 @@ class RandomWordsState extends State<RandomWords> {
     );
 
   }
-
+//builds new wordpairs for widget on scroll and adds a divider in odd places
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
@@ -60,7 +64,7 @@ class RandomWordsState extends State<RandomWords> {
         }
     );
   }
-
+//builds a list item tile
   Widget _buildRow(WordPair pair) {
     final bool alreadySaved = _saved.contains(pair);
     return ListTile(
@@ -83,7 +87,8 @@ class RandomWordsState extends State<RandomWords> {
       },
     );
   }
-
+  //pushes saved wordpairs to a stack to display as a list in new route
+  //when clicking icon on top right
   void _pushSaved() {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
